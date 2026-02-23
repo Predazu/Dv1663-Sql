@@ -1,0 +1,7 @@
+movie_id,title,movie_genre,release_date,director
+1,Inception,Sci-Fi,2010-07-16,Christopher Nolan
+2,Interstellar,Sci-Fi,2014-11-07,Christopher Nolan
+3,Oppenheimer,Biography,2023-07-21,Christopher Nolan
+4,Parasite,Thriller,2019-05-30,Bong Joon-ho
+5,Gladiator,Action,2000-05-05,Ridley Scott
+6,Joker,Crime,2019-10-04,Todd Phillips

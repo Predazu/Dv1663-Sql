@@ -1,0 +1,7 @@
+review_id,movie_id,watcher_id,avg_user_score
+1,1,1,9
+2,2,1,10
+3,3,5,9
+4,4,3,9
+5,5,2,8
+6,6,4,8
