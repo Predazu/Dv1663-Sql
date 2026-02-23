@@ -1,0 +1,7 @@
+Primary keys are:
+cinema_id
+movie_id
+show_id
+
+Foreign keys shows are:
+cinema_id
