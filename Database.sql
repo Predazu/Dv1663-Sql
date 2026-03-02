@@ -1,7 +1,17 @@
+drop database final_project;
 CREATE DATABASE Final_project;
 USE Final_project;
-SHOW TABLES; 
 SET GLOBAL restrict_fk_on_non_standard_key = OFF;
+
+DROP TABLE IF EXISTS Director;
+CREATE TABLE Director (
+	director_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    country_of_origin VARCHAR(255),
+    date_of_birth DATE
+);
+
+
 
 DROP TABLE IF EXISTS Movies;
 CREATE TABLE Movies (
@@ -9,7 +19,8 @@ CREATE TABLE Movies (
     title VARCHAR(255) NOT NULL,
     movie_genre VARCHAR(100),
     release_date DATE,
-    FOREIGN KEY (director) REFERENCES Director(director_id)
+    director_id int,
+    FOREIGN KEY (director_id) REFERENCES Director(director_id)
 );
 
 DROP TABLE IF EXISTS Cinemas;
@@ -34,13 +45,7 @@ CREATE TABLE MovieWatcher (
         ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Director;
-CREATE TABLE Director (
-	director_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    country_of_origin VARCHAR(255),
-    date_of_birth DATE
-);
+
 
 DROP TABLE IF EXISTS Review;
 CREATE TABLE Review (
@@ -72,3 +77,4 @@ CREATE TABLE Shows (
         ON UPDATE CASCADE
 );
 
+show tables;
