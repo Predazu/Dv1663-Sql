@@ -106,7 +106,7 @@ the available directors to lookup have the following id's:
 def main():
     exit = False
 
-    while exit == 0:
+    while exit == False:
         command_var=input(""" 
                           
                         Please select a number related to an action.
@@ -118,7 +118,7 @@ def main():
 5) Query 5
 6) Query 6
 7) Query 7
-8) Query 8
+8) Avg moviescore for a specific director. 
 9) Exit
 : """)
         
