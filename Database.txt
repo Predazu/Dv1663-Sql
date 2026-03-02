@@ -9,7 +9,7 @@ CREATE TABLE Movies (
     title VARCHAR(255) NOT NULL,
     movie_genre VARCHAR(100),
     release_date DATE,
-    director VARCHAR(255)
+    FOREIGN KEY (director) REFERENCES Director(director_id)
 );
 
 DROP TABLE IF EXISTS Cinemas;
