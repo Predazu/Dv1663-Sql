@@ -1,4 +1,4 @@
-drop database final_project;
+
 CREATE DATABASE Final_project;
 USE Final_project;
 SET GLOBAL restrict_fk_on_non_standard_key = OFF;
@@ -68,7 +68,7 @@ CREATE TABLE Shows (
     show_date DATE,
     show_time TIME,
     screen INT,
-    PRIMARY KEY (cinema_id, movie_id),
+    PRIMARY KEY (cinema_id, movie_id, show_date, show_time),
     FOREIGN KEY (cinema_id) REFERENCES Cinemas(cinema_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
@@ -77,4 +77,3 @@ CREATE TABLE Shows (
         ON UPDATE CASCADE
 );
 
-show tables;
