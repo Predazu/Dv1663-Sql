@@ -24,7 +24,7 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
             next(reader)
 
             for row in reader:
-                DB_cursor.execute("Insert Into Cinemas (cinema_id, name, location ) Values (%s, %s, %s)", row)
+                DB_cursor.execute("Insert Ignore Into Cinemas (cinema_id, name, location ) Values (%s, %s, %s)", row)
     DB.commit()
 
     with open("data/DirectorData.csv", newline="", encoding="utf-8") as file:
@@ -32,7 +32,7 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
             next(reader)
 
             for row in reader:
-                DB_cursor.execute("Insert Into Director (director_id, name, country_of_origin, date_of_birth ) Values (%s, %s, %s, %s)", row)
+                DB_cursor.execute("Insert Ignore Into Director (director_id, name, country_of_origin, date_of_birth ) Values (%s, %s, %s, %s)", row)
     DB.commit()
 
     with open("data/Movies.csv", newline="", encoding="utf-8") as file:
@@ -40,7 +40,7 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
             next(reader)
 
             for row in reader:
-                DB_cursor.execute("Insert Into Movies (movie_id, title, movie_genre, release_date, director_id ) Values (%s, %s, %s, %s, %s)", row)
+                DB_cursor.execute("Insert Ignore Into Movies (movie_id, title, movie_genre, release_date, director_id ) Values (%s, %s, %s, %s, %s)", row)
     DB.commit()
 
     with open("data/MovieWatchers.csv", newline="", encoding="utf-8") as file:
@@ -48,7 +48,7 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
             next(reader)
 
             for row in reader:
-                DB_cursor.execute("Insert Into MovieWatcher (watcher_id, username, favorite_genre, favorite_movie, favorite_director ) Values (%s, %s, %s, %s, %s)", row)
+                DB_cursor.execute("Insert Ignore Into MovieWatcher (watcher_id, username, favorite_genre, favorite_movie, favorite_director ) Values (%s, %s, %s, %s, %s)", row)
     DB.commit()
 
     with open("data/Reviews.csv", newline="", encoding="utf-8") as file:
@@ -56,7 +56,7 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
             next(reader)
 
             for row in reader:
-                DB_cursor.execute("Insert Into Review (review_id, movie_id, watcher_id, user_score ) Values (%s, %s, %s, %s)", row)
+                DB_cursor.execute("Insert Ignore Into Review (review_id, movie_id, watcher_id, user_score ) Values (%s, %s, %s, %s)", row)
     DB.commit()
 
     with open("data/ShowList.csv", newline="", encoding="utf-8") as file:
@@ -64,7 +64,7 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
             next(reader)
 
             for row in reader:
-                DB_cursor.execute("Insert Into Shows (cinema_id, movie_id, show_date, show_time, screen ) Values (%s, %s, %s, %s, %s)", row)
+                DB_cursor.execute("Insert Ignore Into Shows (cinema_id, movie_id, show_date, show_time, screen ) Values (%s, %s, %s, %s, %s)", row)
     DB.commit()
 
 
