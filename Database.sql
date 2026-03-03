@@ -50,9 +50,9 @@ CREATE TABLE MovieWatcher (
 DROP TABLE IF EXISTS Review;
 CREATE TABLE Review (
 	review_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_score INT CHECK (user_score BETWEEN 1 AND 10),
     movie_id INT,
     watcher_id INT,
+    user_score INT CHECK (user_score BETWEEN 1 AND 10),
     FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
@@ -63,6 +63,7 @@ CREATE TABLE Review (
 
 DROP TABLE IF EXISTS Shows;
 CREATE TABLE Shows (
+    
     cinema_id INT,
     movie_id INT,
     show_date DATE,

@@ -1,6 +1,6 @@
 watcher_id,username,favorite_genre,favorite_movie,favorite_director
-1,alice,Sci-Fi,Interstellar,Christopher Nolan
-2,bob,Action,Gladiator,Ridley Scott
-3,charlie,Thriller,Parasite,Bong Joon-ho
-4,diana,Crime,Joker,Todd Phillips
-5,erik,Biography,Oppenheimer,Christopher Nolan
+1,alice,Sci-Fi,2,1
+2,bob,Action,5,3
+3,charlie,Thriller,4,2
+4,diana,Crime,6,4
+5,erik,Biography,3,1

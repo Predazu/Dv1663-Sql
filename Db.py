@@ -1,17 +1,76 @@
 import mysql.connector
+import csv
+
 
 
 
 
 # startup config for accessing database
 DB = mysql.connector.connect(
-host ="",
-user ="",
-password ="",
-database=""
+host ="localhost",
+user ="root",
+password ="1234",
+database="Final_project"
 )
 
 DB_cursor = DB.cursor()
+
+
+
+def Csv_porter(): # imports data from the Datafolder into the database tables
+
+    with open("data/Cinemas.csv", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                DB_cursor.execute("Insert Into Cinemas (cinema_id, name, location ) Values (%s, %s, %s)", row)
+    DB.commit()
+
+    with open("data/DirectorData.csv", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                DB_cursor.execute("Insert Into Director (director_id, name, country_of_origin, date_of_birth ) Values (%s, %s, %s, %s)", row)
+    DB.commit()
+
+    with open("data/Movies.csv", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                DB_cursor.execute("Insert Into Movies (movie_id, title, movie_genre, release_date, director_id ) Values (%s, %s, %s, %s, %s)", row)
+    DB.commit()
+
+    with open("data/MovieWatchers.csv", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                DB_cursor.execute("Insert Into MovieWatcher (watcher_id, username, favorite_genre, favorite_movie, favorite_director ) Values (%s, %s, %s, %s, %s)", row)
+    DB.commit()
+
+    with open("data/Reviews.csv", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                DB_cursor.execute("Insert Into Review (review_id, movie_id, watcher_id, user_score ) Values (%s, %s, %s, %s)", row)
+    DB.commit()
+
+    with open("data/ShowList.csv", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+
+            for row in reader:
+                DB_cursor.execute("Insert Into Shows (cinema_id, movie_id, show_date, show_time, screen ) Values (%s, %s, %s, %s, %s)", row)
+    DB.commit()
+
+
+
+
+
 
 
 
@@ -104,6 +163,8 @@ the available directors to lookup have the following id's:
 
 
 def main():
+
+    Csv_porter()
     exit = False
 
     while exit == False:
@@ -121,35 +182,38 @@ def main():
 8) Avg moviescore for a specific director. 
 9) Exit
 : """)
-        
-        if command_var == "exit"  == "Exit" == "9":
+
+        if command_var == "9":
             exit = True
             print("Exiting...")
-        if command_var == "1":
+            
+            
+        elif command_var == "1":
             multirelation_1()
             
-        if command_var == "2":
+        elif command_var == "2":
             multirelation_2()
             
-        if command_var == "3":
+        elif command_var == "3":
             grouping()
             
-        if command_var == "4":
+        elif command_var == "4":
             join()
             
-        if command_var == "5":
+        elif command_var == "5":
             function()
             
-        if command_var == "6":
+        elif command_var == "6":
             trigger()
             
-        if command_var == "7":
+        elif command_var == "7":
             procedure()
             
-        if command_var == "8":
+        elif command_var == "8":
             aggregation()
             
         else:
+            print("your choice was: "+command_var)
             print("The number selected does not match any of the alternatives please try again.")
         
 
