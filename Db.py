@@ -47,7 +47,7 @@ def join(): #Lists how many Movies of each genre directors have made.
     DB_cursor.execute("SELECT d.name AS Director, m.movie_genre AS Genre, " \
     "COUNT(m.movie_genre) AS Amount " \
     "FROM Director d " \
-    "JOIN Movie m ON m.director_id = d.director_id " \
+    "JOIN Movies m ON m.director_id = d.director_id " \
     "GROUP BY d.name, m.movie_genre " \
     "ORDER BY d.name DESC")
     result = DB_cursor.fetchall()
