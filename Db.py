@@ -45,9 +45,10 @@ def grouping(): # skriv funktionallityeten här och bättre namn
 def join(): # List of how many Movies of each genre every director has made, sorted alphabetically.
 
 
-    DB_cursor.execute("SELECT d.name AS Director, DISTINCT m.movie_genre AS Genre, COUNT(m.movie_genre) AS Amount " \
-    "FROM Movies m, Director d " \
-    "WHERE m.director_id = d.director_id " \
+    DB_cursor.execute("SELECT d.name AS Director, DISTINCT m.movie_genre AS Genre, " \
+    "COUNT(m.movie_genre) AS Amount " \
+    "FROM Movies m " \
+    "JOIN Director d ON m.director_id = d.director_id " \
     "ORDER BY d.name DESC")
     result = DB_cursor.fetchall()
     for i in result:
