@@ -100,10 +100,40 @@ def join(): #Lists how many Movies of each genre directors have made.
         print(i)
     return
 
-def function(): # skriv funktionallityeten här och bättre namn
+def function(): # Gives the age of a director when they released the specified movie
 
+    movie_key = input("""
+You have selected Age of director!
+which movie would you like to lookup?
+the movies to lookup have the following id's:
+                        
+1)  Inception
+2)	Interstellar
+3)	Oppenheimer
+4)	Parasite
+5)  Gladiator
+6)  Joker
+""")
+    DB_cursor.execute(f"""DROP FUNCTION IF EXISTS how_old; 
+    DELIMITER $$ 
+    CREATE FUNCTION how_old (movie_key INT) 
+    RETURNS INT DETERMINISTIC 
+    BEGIN 
+    DECLARE age INT; 
+    DECLARE rel_year INT; 
+    DECLARE dir_yob INT; 
+    SELECT YEAR(m.release_date), YEAR(d.date_of_birth) 
+    INTO rel_year, dir_yob 
+    FROM Movies m 
+    JOIN Director d ON m.director = d.director_id AND m.movie_id = movie_key;
+    SET age = rel_year - dir_yob;
+    RETURN age;
+    END; $$
 
-    DB_cursor.execute("")
+    SELECT m.title AS Movie, d.name AS Director, how_old(m.movie_id) AS Age 
+    FROM Movies m 
+    JOIN Director d ON m.director = d.director_id;
+    WHERE m.movie_id = {movie_key}""")
     result = DB_cursor.fetchall()
     for i in result:
         print(i)
@@ -146,16 +176,13 @@ def main():
                 
 1) Query 1
 2) Query 2
-3) Query 3
-4) List how many movies of each genre directors have made
-5) Query 5
-6) Query 6
-7) Query 7
-8) Avg moviescore for a specific director. 
-9) Exit
+3) List how many movies of each genre directors have made
+4) Age of a director during specified movie's release
+5) Avg moviescore for a specific director. 
+6) Exit
 : """)
 
-        if command_var == "9":
+        if command_var == "6":
             exit = True
             print("Exiting...")
             
@@ -164,24 +191,15 @@ def main():
             multirelation_1()
             
         elif command_var == "2":
-            multirelation_2()
-            
-        elif command_var == "3":
             grouping()
             
-        elif command_var == "4":
+        elif command_var == "3":
             join()
             
-        elif command_var == "5":
+        elif command_var == "4":
             function()
             
-        elif command_var == "6":
-            trigger()
-            
-        elif command_var == "7":
-            procedure()
-            
-        elif command_var == "8":
+        elif command_var == "5":
             aggregation()
             
         else:
