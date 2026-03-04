@@ -139,6 +139,25 @@ the movies to lookup have the following id's:
         print(i)
     return
 
+def trigger(): # skriv funktionallityeten här och bättre namn
+
+
+    DB_cursor.execute("")
+    result = DB_cursor.fetchall()
+    for i in result:
+        print(i)
+    return
+
+def procedure(): # skriv funktionallityeten här och bättre namn
+
+
+    DB_cursor.execute("")
+    result = DB_cursor.fetchall()
+    for i in result:
+        print(i)
+    return
+
+
 def aggregation(): # avg moviescore for director. 
     director_id = input("""
 You have selected Avg moviescore for director!
@@ -178,11 +197,13 @@ def main():
 2) Query 2
 3) List how many movies of each genre directors have made
 4) Age of a director during specified movie's release
-5) Avg moviescore for a specific director. 
-6) Exit
+5) Query 5
+6) Query 6
+7) Avg moviescore for a specific director. 
+8) Exit
 : """)
 
-        if command_var == "6":
+        if command_var == "8":
             exit = True
             print("Exiting...")
             
@@ -198,8 +219,14 @@ def main():
             
         elif command_var == "4":
             function()
-            
+
         elif command_var == "5":
+            trigger()
+
+        elif command_var == "6":
+            procedure()
+            
+        elif command_var == "7":
             aggregation()
             
         else:
