@@ -83,15 +83,6 @@ def multirelation_1(): # skriv funktionallityeten här och bättre namn
         print(i)
     return
 
-def multirelation_2(): # skriv funktionallityeten här och bättre namn
-
-
-    DB_cursor.execute("")
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
-    return
-
 def grouping(): # skriv funktionallityeten här och bättre namn
 
 
@@ -110,24 +101,6 @@ def join(): #Lists how many Movies of each genre directors have made.
     return
 
 def function(): # skriv funktionallityeten här och bättre namn
-
-
-    DB_cursor.execute("")
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
-    return
-
-def trigger(): # skriv funktionallityeten här och bättre namn
-
-
-    DB_cursor.execute("")
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
-    return
-
-def procedure(): # skriv funktionallityeten här och bättre namn
 
 
     DB_cursor.execute("")
