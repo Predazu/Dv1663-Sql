@@ -189,7 +189,7 @@ The available movies to lookup have the following id's:
 5)  Gladiator
 6)  Joker
 """)
-    DB_cursor.execute(f"SELECT m.title AS Movie, r.user_score AS Review, r.watcher_id AS Reviewer FROM Review r JOIN Movies m ON r.movie_id = m.movie_id WHERE m.movie_id = {movie_key};")
+    DB_cursor.execute(f"SELECT m.title AS Movie, r.user_score AS Review, mw.username AS Reviewer FROM Review r JOIN Movies m ON r.movie_id = m.movie_id JOIN MovieWatcher mw ON r.watcher_id = mw.watcher_id WHERE m.movie_id = {movie_key};")
     result = DB_cursor.fetchall()
     for i in result:
         print(i)
