@@ -176,8 +176,25 @@ the available directors to lookup have the following id's:
 
     return 
 
+def reviews():
+    movie_key = input(""" 
+You have selected Movie reviews!
+Which movie would you like to look up?
+The available movies to lookup have the following id's:
+                      
+1)  Inception
+2)	Interstellar
+3)	Oppenheimer
+4)	Parasite
+5)  Gladiator
+6)  Joker
+""")
+    DB_cursor.execute(f"SELECT m.title AS Movie, r.user_score AS Review, r.watcher_id AS Reviewer FROM Review r JOIN Movies m ON r.movie_id = m.movie_id WHERE m.movie_id = {movie_key};")
+    result = DB_cursor.fetchall()
+    for i in result:
+        print(i)
 
-
+    return 
 
 
 
@@ -200,10 +217,11 @@ def main():
 5) Query 5
 6) Query 6
 7) Avg moviescore for a specific director. 
-8) Exit
+8) Movie Reviews 
+9) Exit
 : """)
 
-        if command_var == "8":
+        if command_var == "9":
             exit = True
             print("Exiting...")
             
@@ -228,6 +246,9 @@ def main():
             
         elif command_var == "7":
             aggregation()
+        
+        elif command_var == "8":
+            reviews()
             
         else:
             print("your choice was: "+command_var)
