@@ -68,13 +68,6 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
     DB.commit()
 
 
-
-
-
-
-
-
-
 def join(): #Lists how many Movies of each genre directors have made.
 
     DB_cursor.execute("SELECT d.name AS Director, m.movie_genre AS Genre, COUNT(m.movie_genre) AS Amount FROM Director d JOIN Movies m ON m.director = d.director_id GROUP BY d.name, m.movie_genre ORDER BY d.name DESC;")
@@ -82,6 +75,7 @@ def join(): #Lists how many Movies of each genre directors have made.
     for i in result:
         print(i)
     return
+
 
 def function(): # Gives the age of a director when they released the specified movie
 
@@ -122,17 +116,18 @@ the movies to lookup have the following id's:
         print(i)
     return
 
-def procedure(): # Show their favourite movies, genres, and directors
 
+def procedure(): # Show desired users favourite movies, genres, and directors
+    user_id = input("""What user would you like to know more about?""")
 
-    DB_cursor.execute("")
+    DB_cursor.callproc("GetUserFavorites",[user_id])
     result = DB_cursor.fetchall()
     for i in result:
         print(i)
     return
 
 
-def aggregation(): # Movie showings
+def Movie_Showings(): # Movie showings
     Movie_id = input("""
 You have selected Movie showings!
 Which movie would you like to know about?
@@ -157,16 +152,17 @@ Which movie would you like to know about?
 
     return 
 
-def reviews():
+
+def reviews(): # shows reviews for a desired movie
     movie_key = input(""" 
 You have selected Movie reviews!
 Which movie would you like to look up?
 The available movies to lookup have the following id's:
                       
 1)  Inception
-2)	Interstellar
-3)	Oppenheimer
-4)	Parasite
+2)  Interstellar
+3)  Oppenheimer
+4)  Parasite
 5)  Gladiator
 6)  Joker
 """)
@@ -176,9 +172,6 @@ The available movies to lookup have the following id's:
         print(i)
 
     return 
-
-
-
 
 
 def main():
@@ -213,7 +206,7 @@ def main():
             procedure()
             
         elif command_var == "4":
-            aggregation()
+            Movie_Showings()
         
         elif command_var == "5":
             reviews()
