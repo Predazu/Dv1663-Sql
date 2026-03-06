@@ -127,11 +127,17 @@ User id, Username""")
 
     DB_cursor.nextset() 
     user_id = input("please enter user id: ")
-
     DB_cursor.callproc("Get_user_favorites",(user_id,))
-    for result in DB_cursor.stored_results(): # this gives a deprecation warning on first run however i dont care as it works
+    for result in DB_cursor.stored_results():
+
+        
+        """ this gives a deprecation warning on first run however it works"""
+
+
+
         for i in result.fetchall():
             print(i)
+    print("username, Favorite movie, Favorite director, Favorite genre")
     return
 
 
