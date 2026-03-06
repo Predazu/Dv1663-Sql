@@ -1,4 +1,3 @@
-
 CREATE DATABASE Final_project;
 USE Final_project;
 SET GLOBAL restrict_fk_on_non_standard_key = OFF;
@@ -78,3 +77,19 @@ CREATE TABLE Shows (
         ON UPDATE CASCADE
 );
 
+Delimiter $$
+
+CREATE PROCEDURE Get_user_favorites(IN watcher_id int)
+Begin 
+Select
+mw.username as User,
+m.title As FavoriteMovie ,
+d.name As FavoriteDirector,
+mw.favorite_genre AS FavoriteGenre
+From MovieWatcher mw
+Join movies m On mw.favorite_movie = m.movie_id
+Join director d On mw.favorite_director = d.director_id
+Where mw.watcher_id = watcher_id;
+    
+
+End $$

@@ -4,7 +4,6 @@ import csv
 
 
 
-
 # startup config for accessing database
 DB = mysql.connector.connect(
 host ="localhost",
@@ -117,21 +116,22 @@ the movies to lookup have the following id's:
     return
 
 
-def procedure(): # Show desired users favourite movies, genres, and directors
+def procedure(): # Show desired users favourite movies, genres
     print("""which user would you like to know more about?
 User id, Username""")
+
     DB_cursor.execute("select watcher_id, username from Moviewatcher ")
     Users = DB_cursor.fetchall()
     for i in Users:
         print(i)
 
+    DB_cursor.nextset() 
+    user_id = input("please enter user id: ")
 
-    user_id = input("please enter user id:")
-
-    DB_cursor.callproc("GetUserFavorites",[user_id])
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
+    DB_cursor.callproc("Get_user_favorites",(user_id,))
+    for result in DB_cursor.stored_results(): # this gives a deprecation warning on first run however i dont care as it works
+        for i in result.fetchall():
+            print(i)
     return
 
 
