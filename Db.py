@@ -118,7 +118,15 @@ the movies to lookup have the following id's:
 
 
 def procedure(): # Show desired users favourite movies, genres, and directors
-    user_id = input("""What user would you like to know more about?""")
+    print("""which user would you like to know more about?
+User id, Username""")
+    DB_cursor.execute("select watcher_id, username from Moviewatcher ")
+    Users = DB_cursor.fetchall()
+    for i in Users:
+        print(i)
+
+
+    user_id = input("please enter user id:")
 
     DB_cursor.callproc("GetUserFavorites",[user_id])
     result = DB_cursor.fetchall()
@@ -128,18 +136,17 @@ def procedure(): # Show desired users favourite movies, genres, and directors
 
 
 def Movie_Showings(): # Movie showings
-    Movie_id = input("""
+    print("""
 You have selected Movie showings!
 Which movie would you like to know about?
-                        
-1)  Inception
-2)  Interstellar
-3)  Oppenheimer
-4)  Parasite
-5)  Gladiator
-6)  Joker
+Movie id, Title
 """)
+    DB_cursor.execute("select movie_id, title from Movies ")
+    Movies = DB_cursor.fetchall()
+    for i in Movies:
+        print(i)
     
+    Movie_id = input("please enter movie id: ")
 
     
     DB_cursor.execute("""Select m.title As Movie, s.screen As Screen, DATE_FORMAT(s.show_date, '%Y-%m-%d'),
