@@ -74,23 +74,6 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
 
 
 
-def multirelation_1(): # skriv funktionallityeten här och bättre namn
-
-
-    DB_cursor.execute("")
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
-    return
-
-def grouping(): # skriv funktionallityeten här och bättre namn
-
-
-    DB_cursor.execute("")
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
-    return
 
 def join(): #Lists how many Movies of each genre directors have made.
 
@@ -139,16 +122,7 @@ the movies to lookup have the following id's:
         print(i)
     return
 
-def trigger(): # skriv funktionallityeten här och bättre namn
-
-
-    DB_cursor.execute("")
-    result = DB_cursor.fetchall()
-    for i in result:
-        print(i)
-    return
-
-def procedure(): # skriv funktionallityeten här och bättre namn
+def procedure(): # Show their favourite movies, genres, and directors
 
 
     DB_cursor.execute("")
@@ -158,19 +132,26 @@ def procedure(): # skriv funktionallityeten här och bättre namn
     return
 
 
-def aggregation(): # avg moviescore for director. 
-    director_id = input("""
-You have selected Avg moviescore for director!
-which director would you like to lookup?
-the available directors to lookup have the following id's:
+def aggregation(): # Movie showings
+    Movie_id = input("""
+You have selected Movie showings!
+Which movie would you like to know about?
                         
-1)  Christopher Nolan	
-2)	Bong Joon-ho	
-3)	Ridley Scott	
-4)	Todd Phillips
+1)  Inception
+2)  Interstellar
+3)  Oppenheimer
+4)  Parasite
+5)  Gladiator
+6)  Joker
 """)
-    DB_cursor.execute("")
+    
+
+    
+    DB_cursor.execute("""Select m.title As Movie, s.screen As Screen, DATE_FORMAT(s.show_date, '%Y-%m-%d'),
+                        DATE_FORMAT(s.show_time, '%H:%i'), c.name As Cinema,
+                        c.location As location From Movies m Join Shows s On m.movie_id = s.movie_id Join Cinemas c On s.cinema_id = c.cinema_id Where m.movie_id = """ + Movie_id)
     result = DB_cursor.fetchall()
+    print("Title,Screen,Date,Time,Cinema,Location")
     for i in result:
         print(i)
 
@@ -210,48 +191,35 @@ def main():
                           
                         Please select a number related to an action.
                 
-1) Query 1
-2) Query 2
-3) List how many movies of each genre directors have made
-4) Age of a director during specified movie's release
-5) Query 5
-6) Query 6
-7) Avg moviescore for a specific director. 
-8) Movie Reviews 
-9) Exit
+1) List how many movies of each genre directors have made
+2) Age of a director during specified movie's release
+3) User favorites
+4) Movie showings 
+5) Movie Reviews 
+6) Exit
 : """)
 
-        if command_var == "9":
+        if command_var == "6":
             exit = True
             print("Exiting...")
             
-            
         elif command_var == "1":
-            multirelation_1()
-            
-        elif command_var == "2":
-            grouping()
-            
-        elif command_var == "3":
             join()
             
-        elif command_var == "4":
+        elif command_var == "2":
             function()
 
-        elif command_var == "5":
-            trigger()
-
-        elif command_var == "6":
+        elif command_var == "3":
             procedure()
             
-        elif command_var == "7":
+        elif command_var == "4":
             aggregation()
         
-        elif command_var == "8":
+        elif command_var == "5":
             reviews()
             
         else:
-            print("your choice was: "+command_var)
+            print("your choice was: "+ command_var)
             print("The number selected does not match any of the alternatives please try again.")
         
 
