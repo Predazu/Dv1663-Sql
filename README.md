@@ -1,7 +1,10 @@
 # Dv1663-Sql
 Modules needed to be imported:
+
 1.mysql.connector Version: 2.2.9
+
 Home-page: http://dev.mysql.com/doc/connector-python/en/index.html
+
 Author: Oracle and/or its affiliates
 
 to install:  pip install mysql-connector-python
