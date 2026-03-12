@@ -105,8 +105,8 @@ the movies to lookup have the following id's:
 # problem currently där den visar alla filmer
     DB_cursor.execute(f"""SELECT m.title AS Movie, d.name AS Director, how_old(m.movie_id) AS Age 
     FROM Movies m 
-    JOIN Director d ON m.director_id = d.director_id;
-    WHERE m.movie_id = {movie_key}""")
+    JOIN Director d ON m.director_id = d.director_id
+    WHERE m.movie_id = {movie_key};""")
     
     result = DB_cursor.fetchall()
 
