@@ -93,3 +93,21 @@ Where mw.watcher_id = watcher_id;
     
 
 End $$
+
+
+
+Delimiter $$
+
+    CREATE FUNCTION how_old (movie_key INT) 
+    RETURNS INT DETERMINISTIC 
+    BEGIN 
+    DECLARE age INT; 
+    DECLARE rel_year INT; 
+    DECLARE dir_yob INT; 
+    SELECT YEAR(m.release_date), YEAR(d.date_of_birth) 
+    INTO rel_year, dir_yob 
+    FROM Movies m 
+    JOIN Director d ON m.director_id = d.director_id AND m.movie_id = movie_key;
+    SET age = rel_year - dir_yob;
+    RETURN age;
+	END $$

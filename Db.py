@@ -69,7 +69,12 @@ def Csv_porter(): # imports data from the Datafolder into the database tables
 
 def join(): #Lists how many Movies of each genre directors have made.
 
-    DB_cursor.execute("SELECT d.name AS Director, m.movie_genre AS Genre, COUNT(m.movie_genre) AS Amount FROM Director d JOIN Movies m ON m.director = d.director_id GROUP BY d.name, m.movie_genre ORDER BY d.name DESC;")
+    DB_cursor.execute("""SELECT d.name AS Director,
+                       m.movie_genre AS Genre,
+                       COUNT(m.movie_genre) AS Amount FROM Director d
+                       JOIN Movies m ON m.director_id = d.director_id
+                       GROUP BY d.name, m.movie_genre 
+                       ORDER BY d.name DESC;""")
     result = DB_cursor.fetchall()
     for i in result:
         print(i)
@@ -84,33 +89,27 @@ which movie would you like to lookup?
 the movies to lookup have the following id's:
                         
 1)  Inception
-2)	Interstellar
-3)	Oppenheimer
-4)	Parasite
+2)  Interstellar
+3)  Oppenheimer
+4)  Parasite
 5)  Gladiator
 6)  Joker
 """)
-    DB_cursor.execute(f"""DROP FUNCTION IF EXISTS how_old; 
-    DELIMITER $$ 
-    CREATE FUNCTION how_old (movie_key INT) 
-    RETURNS INT DETERMINISTIC 
-    BEGIN 
-    DECLARE age INT; 
-    DECLARE rel_year INT; 
-    DECLARE dir_yob INT; 
-    SELECT YEAR(m.release_date), YEAR(d.date_of_birth) 
-    INTO rel_year, dir_yob 
-    FROM Movies m 
-    JOIN Director d ON m.director = d.director_id AND m.movie_id = movie_key;
-    SET age = rel_year - dir_yob;
-    RETURN age;
-    END; $$
+    
 
-    SELECT m.title AS Movie, d.name AS Director, how_old(m.movie_id) AS Age 
+    #DB_cursor.execute(f"""Select how_old({movie_key})""")
+
+    #DB_cursor.fetchone()
+
+
+# problem currently där den visar alla filmer
+    DB_cursor.execute(f"""SELECT m.title AS Movie, d.name AS Director, how_old(m.movie_id) AS Age 
     FROM Movies m 
-    JOIN Director d ON m.director = d.director_id;
+    JOIN Director d ON m.director_id = d.director_id;
     WHERE m.movie_id = {movie_key}""")
+    
     result = DB_cursor.fetchall()
+
     for i in result:
         print(i)
     return
@@ -157,7 +156,10 @@ Movie id, Title
     
     DB_cursor.execute("""Select m.title As Movie, s.screen As Screen, DATE_FORMAT(s.show_date, '%Y-%m-%d'),
                         DATE_FORMAT(s.show_time, '%H:%i'), c.name As Cinema,
-                        c.location As location From Movies m Join Shows s On m.movie_id = s.movie_id Join Cinemas c On s.cinema_id = c.cinema_id Where m.movie_id = """ + Movie_id)
+                        c.location As location From Movies m
+                        Join Shows s On m.movie_id = s.movie_id 
+                        Join Cinemas c On s.cinema_id = c.cinema_id 
+                        Where m.movie_id = """ + Movie_id)
     result = DB_cursor.fetchall()
     print("Title,Screen,Date,Time,Cinema,Location")
     for i in result:
@@ -179,7 +181,10 @@ The available movies to lookup have the following id's:
 5)  Gladiator
 6)  Joker
 """)
-    DB_cursor.execute(f"SELECT m.title AS Movie, r.user_score AS Review, mw.username AS Reviewer FROM Review r JOIN Movies m ON r.movie_id = m.movie_id JOIN MovieWatcher mw ON r.watcher_id = mw.watcher_id WHERE m.movie_id = {movie_key};")
+    DB_cursor.execute(f"""SELECT m.title AS Movie,
+                       r.user_score AS Review,
+                       mw.username AS Reviewer FROM Review r JOIN Movies m ON r.movie_id = m.movie_id
+                       JOIN MovieWatcher mw ON r.watcher_id = mw.watcher_id WHERE m.movie_id = {movie_key};""")
     result = DB_cursor.fetchall()
     for i in result:
         print(i)
